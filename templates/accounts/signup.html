@@ -1,0 +1,38 @@
+{% extends 'base.html'%}
+{% block title %}CIS | Sign Up {% endblock %}
+{% block content%}
+<div class="center">
+        <h1>Cognizant Industrial Solutions</h1>
+        <form  method="post">
+            {% csrf_token %}
+            <div class="txt_field">
+                {{ form.email }}
+                <span></span>
+                <label>UserEmail</label>
+            </div>
+
+            <div class="txt_field">
+                {{ form.username }}
+                <span></span>
+                <label>User Name</label>
+            </div>
+
+            <div class="txt_field">
+                {{form.password1}}
+                <span></span>
+                <label>Password</label>
+            </div>
+
+            <div class="txt_field">
+                {{form.password2}}
+                <span></span>
+                <label>Confirm Password</label>
+            </div>
+
+            <input type="submit" value="Login">
+            <div class="signupLink">
+                Be a Memeber-> <a href="/signup">SignUp</a>
+            </div>
+        </form>
+    </div>
+{% endblock %}

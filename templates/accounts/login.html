@@ -1,0 +1,30 @@
+{% extends 'base.html'%}
+{% block title %}CIS | Login{% endblock %}
+
+{% block content%}
+<div class="center">
+    <h1>Cognizant Industrial Solutions</h1><hr>
+    <form method="post">
+        {% csrf_token %}
+        <div class="txt_field">
+            <input type="text" name="user_name" required>
+            <span></span>
+            <label>User Name</label>
+        </div>
+        <div class="txt_field">
+            <input type="password" name="password" required>
+            <span></span>
+            <label>Password</label>
+        </div>
+        <input type="submit" value="Login">
+        <div class="signupLink">
+            Be a Memeber <a href="/signup">SignUp</a>
+        </div>
+    </form>
+        <div class="text-center">
+            {% for msg in messages%}
+            <p>{{msg}}</p>
+        {% endfor %}
+        </div>
+</div>
+{% endblock %}

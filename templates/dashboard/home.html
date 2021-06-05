@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    CIS| Dashboard
+{% endblock %}
+
+{% block content %}
+    <h3>Welcome to CIS--IntelliLink Platform {{ request.user }}</h3>
+<div class="values">
+        <div class="flex-container">
+            <div class="val-box">
+                <h4>Room Temperature</h4><hr>
+                <h3 id="roomTemp"><span></span></h3>
+            </div>
+            <div  class="val-box">
+                <h4>Room Humidity</h4><hr>
+                <h3 id="roomHumid"><span></span></h3>
+            </div>
+                        <div  class="val-box">
+                <h4>Room Humidity</h4><hr>
+                <h3 id="roomHumid"><span></span></h3>
+            </div>
+        </div>
+
+        <div class="flex-container-2">
+            <div  class="val-box-2">
+                <h4>Loom Temperature</h4><hr>
+                <h3 id="loomTemp"><span></span></h3>
+            </div>
+            <div  class="val-box-2">
+                <h4>Loom Humidity</h4><hr>
+                <h3 id="loomHumid"><span></span></h3>
+            </div>
+            <div  class="val-box-2">
+                <h4>Loom Temperature</h4><hr>
+                <h3 id="loomTemp"><span></span></h3>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <script>
+        $(document).ready(function () {
+            setInterval(function () {
+                $.ajax({
+                    type: 'GET',
+                    url: "{% url 'dash_getData' %}",
+                    success: function(response){
+                        console.log(response)
+                        let roomTemp =response.senseVals['roomTemp']
+                        let loomTemp =response.senseVals['loomtemp']
+                        let roomHumid = response.senseVals['roomHumid']
+                        let loomHumid = response.senseVals['loomHumid']
+                        document.getElementById('roomTemp').textContent = roomTemp
+                        document.getElementById('loomTemp').textContent = loomTemp
+                        document.getElementById('roomHumid').textContent = roomHumid
+                        document.getElementById('loomHumid').textContent = loomHumid
+                    },
+
+                    error: function (){
+                        alert('No Data Found')
+                    }
+                })
+            }, 30000);
+        });
+
+    </script>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
