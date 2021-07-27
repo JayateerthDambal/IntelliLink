@@ -7,6 +7,7 @@ class SensorData(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     date = models.DateField(auto_now_add=True, null=True)
     time = models.TimeField(auto_now_add=True, null=True)
+    date_time = models.DateTimeField(auto_now_add=True, null=True)
     ###SensorValues
     roomTemp = models.FloatField(max_length=10, null=True)
     roomHumid = models.FloatField(max_length=10, null=True)
@@ -16,4 +17,4 @@ class SensorData(models.Model):
 
 
     class Meta:
-        get_latest_by = 'time'
+        get_latest_by = 'date_time'
