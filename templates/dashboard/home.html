@@ -5,51 +5,55 @@
 {% endblock %}
 
 {% block content %}
-    <h3>Welcome to CIS--IntelliLink Platform {{ request.user }}</h3>
-<div class="values">
+    <h3>Welcome to CIS--IntelliLink Platform, {{ request.user }}</h3>
+    <div class="values">
         <div class="flex-container">
             <div class="val-box">
-                <h4>Room Temperature</h4><hr>
+                <h4>Room Temperature</h4>
+                <hr>
                 <h3 id="roomTemp"><span></span></h3>
             </div>
-            <div  class="val-box">
-                <h4>Room Humidity</h4><hr>
+            <div class="val-box">
+                <h4>Room Humidity</h4>
+                <hr>
                 <h3 id="roomHumid"><span></span></h3>
             </div>
-                        <div  class="val-box">
-                <h4>Room Humidity</h4><hr>
-                <h3 id="roomHumid"><span></span></h3>
-            </div>
+
         </div>
 
         <div class="flex-container-2">
-            <div  class="val-box-2">
-                <h4>Loom Temperature</h4><hr>
+            <div class="val-box-2">
+                <h4>Loom Temperature</h4>
+                <hr>
                 <h3 id="loomTemp"><span></span></h3>
             </div>
-            <div  class="val-box-2">
-                <h4>Loom Humidity</h4><hr>
+            <div class="val-box-2">
+                <h4>Loom Humidity</h4>
+                <hr>
                 <h3 id="loomHumid"><span></span></h3>
             </div>
-            <div  class="val-box-2">
-                <h4>Loom Temperature</h4><hr>
-                <h3 id="loomTemp"><span></span></h3>
-            </div>
+
         </div>
+            <canvas id="paramsChart" style="overflow: scroll"></canvas>
 
     </div>
 
+    <h2>hee</h2>
+    <h2>fkjbdkvj</h2>
+    <h3>denvjdlv </h3>
     <script src="{% static 'js/jquery.js' %}"></script>
     <script>
+
         $(document).ready(function () {
+
             setInterval(function () {
                 $.ajax({
                     type: 'GET',
                     url: "{% url 'dash_getData' %}",
-                    success: function(response){
-                        console.log(response)
-                        let roomTemp =response.senseVals['roomTemp']
-                        let loomTemp =response.senseVals['loomtemp']
+                    success: function (response) {
+                        {#console.log(response)#}
+                        let roomTemp = response.senseVals['roomTemp']
+                        let loomTemp = response.senseVals['loomtemp']
                         let roomHumid = response.senseVals['roomHumid']
                         let loomHumid = response.senseVals['loomHumid']
                         document.getElementById('roomTemp').textContent = roomTemp
@@ -58,13 +62,59 @@
                         document.getElementById('loomHumid').textContent = loomHumid
                     },
 
-                    error: function (){
+                    error: function () {
                         alert('No Data Found')
                     }
                 })
-            }, 10000);
-        });
+                $.ajax({
+                    type: 'GET',
+                    url: "{% url 'chart_data' %}",
+                    success: function (data) {
+                        console.log(data.chartVals[0].roomTemp)
+                        {#console.log(typeof data)#}
+                        var paramVals = []
+                        var timeVals = []
+                        for (let i = 0; i <= 9; i++) {
+                            paramVals.push(data.chartVals[i].roomTemp)
+                            {#console.log(data.chartVals[i].time)#}
+                            timeVals.push(data.chartVals[i].time)
+                        }
+                        console.log(paramVals);
 
+                        //Plot Chart
+                        var $paramsChart = $("#paramsChart");
+
+                        var ctx = $paramsChart[0].getContext("2d");
+                        new Chart(ctx, {
+                            type: 'line',
+                            data: {
+                                labels: timeVals,
+                                datasets: [{
+                                    label: 'Room Temperature',
+                                    backgroundColor: 'blue',
+                                    borderColor: 'rgb(255, 99, 132)',
+                                    data: paramVals
+                                }]
+                            },
+                            options:{
+                                responsive: true,
+
+                                title:{
+                                    display: true,
+                                    text: 'Histrotic Trend Graph(Newest 10Values)'
+                                }
+                            }
+                        })
+                    },
+                    error: function () {
+                        alert('No Chart Data Found!')
+                    }
+                })
+
+            }, 10000);
+
+
+        });
     </script>
 {% endblock %}
 

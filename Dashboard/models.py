@@ -15,6 +15,5 @@ class SensorData(models.Model):
     loomtemp = models.FloatField(max_length=10, null=True)
 
 
-
     class Meta:
         get_latest_by = 'date_time'

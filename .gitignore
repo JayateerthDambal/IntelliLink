@@ -1,0 +1,15 @@
+# Created by .ignore support plugin (hsz.mobi)
+.idea/.gitignore
+.idea/IntelliLink.iml
+.idea/dataSources.xml
+.idea/deployment.xml
+.idea/inspectionProfiles/
+.idea/jsLibraryMappings.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml
+Dashboard/migrations/__pycache__/0004_alter_sensordata_options.cpython-38.pyc
+Include/
+Lib/
+db.sqlite3
+pyvenv.cfg
