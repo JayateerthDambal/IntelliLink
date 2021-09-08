@@ -19,18 +19,14 @@ def dash_getData(request):
                                        user=request.user)
     # SensorData.objects.create()
     senseVals = SensorData.objects.values().latest("date_time")
-    # roomTempVals = SensorData.objects.values('roomTemp', 'time').order_by('-id')[:10][::1]
-    # print(roomTempVals[0]['time'])
+    roomTempVals = SensorData.objects.filter(user=request.user).values('roomTemp', 'time').order_by('-id')[:25][::1]
+    loomHumidVals = SensorData.objects.filter(user=request.user).values('loomHumid', 'time').order_by('-id')[:25][::1]
+
 
     return JsonResponse(data={
-        'senseVals': senseVals
+        'senseVals': senseVals, 'chart_data': roomTempVals
     })
 
 
-def chart_data_rendering(request):
-    roomTempvals = SensorData.objects.values('roomTemp', 'time').order_by('-id')[:10][::1]
-    # print(type(roomTempvals))
-    return JsonResponse({
-        'chartVals': roomTempvals
-    })
+
         
