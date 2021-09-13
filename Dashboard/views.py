@@ -19,14 +19,25 @@ def dash_getData(request):
                                        user=request.user)
     # SensorData.objects.create()
     senseVals = SensorData.objects.values().latest("date_time")
-    roomTempVals = SensorData.objects.filter(user=request.user).values('roomTemp', 'time').order_by('-id')[:25][::1]
-    loomHumidVals = SensorData.objects.filter(user=request.user).values('loomHumid', 'time').order_by('-id')[:25][::1]
+    paramsChartVals = SensorData.objects.filter(user=request.user).values('roomTemp', 'time', 'loomtemp', 'roomHumid', 'loomHumid').order_by('-id')[:25][::1]
+    # loomHumidVals = SensorData.objects.filter(user=request.user).values('loomHumid', 'time').order_by('-id')[:25][::1]
 
 
     return JsonResponse(data={
-        'senseVals': senseVals, 'chart_data': roomTempVals
+        'senseVals': senseVals, 'chart_data': paramsChartVals
     })
 
 
 
-        
+def humidCharts(request):
+    return render(request, 'test.html')
+
+
+
+def dash_getHumidData(request):
+    humidChartVals = SensorData.objects.filter(user=request.user).values('roomHumid', 'time').order_by('-id')[:25][::1]
+
+
+    return JsonResponse(data={
+        'humidVals': humidChartVals
+    })

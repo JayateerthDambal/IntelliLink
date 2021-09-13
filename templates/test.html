@@ -1,13 +1,27 @@
 {% extends 'base.html' %}
-
-{% block content %}
-    <h1>Test</h1>
-<h1>Test</h1>
-<h1>{{ vals }}</h1>
-
-
-<script>
-    console.log({{ vals|safe }})
-    console.log('Hello')
-</script>
+{% block title %}
+    CIS| BetaProgram
 {% endblock %}
+{% block content %}
+    <h3>Welcome , {{ request.user }}</h3>
+    <div class="container-fluid">
+        <canvas id="humidCharts"></canvas>
+    </div>
+
+
+
+    <script>
+        $(document).ready(function () {
+            setInterval( function () {
+
+                $.ajax({
+                    type: 'GET',
+                    url: '{% url 'dash_getHumidData' %}',
+                    success: function(data){
+                })
+            },10000)
+
+        });
+    </script>
+{% endblock %}
+
