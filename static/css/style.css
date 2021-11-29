@@ -159,36 +159,41 @@ input[type="submit"]:hover {
     box-shadow: 2px 2px 2px 2px rgba(179, 149, 233, 0.205);
     border-radius: 15px;
 }
-.paramBox{
+
+.paramBox {
     margin-left: 10px;
 }
+
 .valBox hr {
-  margin-top: 8%;
+    margin-top: 8%;
 }
+
 .valBox h5 {
-  margin-top: 15px;
-  font-size: 16px;
-  text-align: center;
-  font-weight: 600;
-  color: rgb(43, 1, 83);
+    margin-top: 15px;
+    font-size: 16px;
+    text-align: center;
+    font-weight: 600;
+    color: rgb(43, 1, 83);
 }
+
 .valBox h3 {
-  font-size: 55px;
-  text-align: center;
-  color: blueviolet;
+    font-size: 55px;
+    text-align: center;
+    color: blueviolet;
 }
+
 .col-9 {
-  height: 25px;
-  width: 180px;
-  border: 1px solid rgba(61, 61, 61, 0.198);
-  /* box-shadow: 1px 2px  black; */
-  border-radius: 15px;
+    height: 25px;
+    width: 180px;
+    border: 1px solid rgba(61, 61, 61, 0.198);
+    /* box-shadow: 1px 2px  black; */
+    border-radius: 15px;
 }
 
 .col-9 p {
-  text-align: left;
-  margin-left: 10px;
-  padding-bottom: 8px;
+    text-align: left;
+    margin-left: 10px;
+    padding-bottom: 8px;
 }
 
 .basicio {
@@ -216,10 +221,11 @@ input[type="submit"]:hover {
     flex-wrap: wrap;
 }
 
-#TempChart{
+#TempChart {
     margin-left: 20px;
 }
-#HumidChart{
+
+#HumidChart {
     margin-left: 25px;
 }
 
@@ -266,7 +272,6 @@ input[type="submit"]:hover {
 }
 
 
-
 /*********************** Repoonsive Design ********************** */
 /* ***********************Mobile View ***********************/
 
@@ -305,7 +310,98 @@ input[type="submit"]:hover {
         color: #483d8b;
     }
 
+    .paramBox {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+
+    }
+
+    .col {
+        margin-left: 15px;
+        height: 140px;
+        width: 155px !important;
+    }
+
+    .valBox {
+        margin-left: 18px;
+        margin-right: 3px;
+        margin-top: 10px;
+    }
+
+    .valBox h5 {
+        font-size: 14px;
+    }
+
+    .valBox h3 {
+        font-size: 45px;
+        text-align: center;
+        color: #8a2be2;
+    }
+
+    .paramChart canvas {
+        margin-left: 15px;
+        width: 320px;
+        height: 350px;
+    }
+
+    #TempChart {
+        margin: 12px 0 0 15px;
+    }
+
+    #HumidChart {
+        margin: 12px 0 0 15px;
+    }
+
+    .mainio {
+        margin: 10px;
+        /* border: 1px solid blue; */
+        padding: 10px;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .sector {
+        height: 90px;
+
+        margin-left: 5px;
+    }
+
+    .sector button {
+        margin-left: 10px;
+        width: 200px;
+    }
+
+    .sector h4 {
+        margin-top: 12px;
+        font-size: 15px;
+    }
 }
+
+@media screen and (max-width: 450px) {
+    .center {
+        width: 350px;
+    }
+
+    .center h1 {
+        padding: 10px 0 20px 0;
+        font-size: 20px;
+    }
+
+    .center p {
+        text-align: center;
+        padding: 5px;
+        /* box-shadow: 1px 1px 1px 1px black; */
+        /* width: 200px; */
+        border: 1px solid #7c42e9;
+        width: 300px;
+        margin-left: 25px;
+    }
+}
+
+/* Mobile responsive */
+
 
 @media screen and (max-width: 450px) {
     .center {

@@ -82,7 +82,7 @@
                     </button>
                 </div>
                 <div class="sector">
-                    <h4>Loom-Pump</h4>
+                    <h4>Room-Pump</h4>
                     <button type="button" class="btn btn-primary active" data-bs-toggle="button" autocomplete="off"
                             aria-pressed="true">Active toggle button
                     </button>
@@ -91,142 +91,151 @@
 
         </div>
     </div>
-        <script src="{% static 'js/jquery.js' %}"></script>
-        <script>
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <script>
 
-            $(document).ready(function () {
+        $(document).ready(function () {
 
-                setInterval(function () {
+            setInterval(function () {
 
-                    $.ajax({
-                        type: 'GET',
-                        url: '{% url 'dash_getData' %}',
-                        success: function (response) {
-                            {#console.log(response)#}
-                            {#console.log(response.chart_data[0])#}
+                $.ajax({
+                    type: 'GET',
+                    url: '{% url 'dash_getData' %}',
+                    success: function (response) {
+                        {#console.log(response)#}
+                        {#console.log(response.chart_data[0])#}
 
-                            let roomTemp = response.senseVals['roomTemp']
-                            let loomTemp = response.senseVals['loomtemp']
-                            let roomHumid = response.senseVals['roomHumid']
-                            let loomHumid = response.senseVals['loomHumid']
-                            document.getElementById('roomTemp').textContent = roomTemp
-                            document.getElementById('loomTemp').textContent = loomTemp
-                            document.getElementById('roomHumid').textContent = roomHumid
-                            document.getElementById('loomHumid').textContent = loomHumid
-                            var roomTempVals = []
-                            var timeVals = []
-                            var loomTempVals = []
-                            var loomHumdVals = []
-                            var roomHumdVals = []
-                            for (let i = 0; i <= 19; i++) {
-                                roomTempVals.push(response.chart_data[i].roomTemp)
-                                timeVals.push(response.chart_data[i].time)
-                                loomTempVals.push(response.chart_data[i].loomtemp)
-                                loomHumdVals.push(response.chart_data[i].loomHumid)
-                                roomHumdVals.push(response.chart_data[i].roomHumid)
-                            }
-                            {#console.log(paramsVals)#}
-                            var config = {
-                                type: 'line',
-                                data: {
-                                    labels: timeVals,
-                                    datasets: [
-                                        {
-                                            label: 'Room Temperature',
-                                            backgroundColor: 'rgb(38,55,201)',
-                                            borderColor: 'rgb(103,124,201)',
-                                            data: roomTempVals
-                                        },
-                                        {
-                                            label: 'Loom Temperature',
-                                            backgroundColor: 'rgb(134,56,224)',
-                                            borderColor: 'rgba(134,56,224,0.76)',
-                                            data: loomTempVals
-                                        }
-                                    ]
-                                },
-                                options: {
-                                    maintainAspectRatio: false,
-                                    responsive: false,
-                                    plugins: {
-                                        title: {
-                                            display: true,
-                                            text: 'Realtime Graph'
-                                        }
-                                    },
-                                    interaction: {
-                                        intersect: false,
-                                        mode: 'nearest',
-                                    },
-
-                                }
-
-                            };
-
-                            var config2 = {
-                                type: 'line',
-                                data: {
-                                    labels: timeVals,
-                                    datasets: [
-                                        {
-                                            label: 'Room Humididty',
-                                            backgroundColor: 'rgb(38,55,201)',
-                                            borderColor: 'rgb(103,124,201)',
-                                            data: roomHumdVals
-                                        },
-                                        {
-                                            label: 'Loom Temperature',
-                                            backgroundColor: 'rgb(134,56,224)',
-                                            borderColor: 'rgba(134,56,224,0.76)',
-                                            data: loomHumdVals
-                                        }
-                                    ]
-                                },
-                                options: {
-                                    maintainAspectRatio: false,
-                                    responsive: false,
-                                    plugins: {
-                                        title: {
-                                            display: true,
-                                            text: 'Realtime Graph'
-                                        }
-                                    },
-                                    interaction: {
-                                        intersect: false,
-                                        mode: 'nearest',
-                                    },
-
-                                }
-                            };
-                            let $paramsChart = $("#paramsChart");
-                            $("canvas#TempChart").remove()
-                            $("canvas#HumidChart").remove()
-
-                            $("div.paramChart").append('<canvas id="TempChart\" style="display: inline;"></canvas>');
-                            $("div.paramChart").append('<canvas id="HumidChart\" style="display: inline;"></canvas>');
-                            var ctx = document.getElementById('TempChart').getContext('2d');
-                            var ctx2 = document.getElementById('HumidChart').getContext('2d');
-
-                            {#ctx.canvas.width = 600;#}
-                            {#ctx.canvas.height = 350;#}
-                            {##}
-                            {##}
-                            {#ctx2.canvas.width = 600;#}
-                            {#ctx2.canvas.height = 350;#}
-                            var LiveChart = new Chart(ctx, config);
-                            var LiveChart2 = new Chart(ctx2, config2);
-
-                        },
-
-                        error: function () {
-                            alert('No Data Found')
+                        let roomTemp = response.senseVals['roomTemp']
+                        let loomTemp = response.senseVals['loomtemp']
+                        let roomHumid = response.senseVals['roomHumid']
+                        let loomHumid = response.senseVals['loomHumid']
+                        document.getElementById('roomTemp').textContent = roomTemp
+                        document.getElementById('loomTemp').textContent = loomTemp
+                        document.getElementById('roomHumid').textContent = roomHumid
+                        document.getElementById('loomHumid').textContent = loomHumid
+                        var roomTempVals = []
+                        var timeVals = []
+                        var loomTempVals = []
+                        var loomHumdVals = []
+                        var roomHumdVals = []
+                        for (let i = 0; i <= 19; i++) {
+                            roomTempVals.push(response.chart_data[i].roomTemp)
+                            {#console.log(response.chart_data[i].time.slice(0,8))#}
+                            timeVals.push(response.chart_data[i].time.slice(0, 8));
+                            loomTempVals.push(response.chart_data[i].loomtemp)
+                            loomHumdVals.push(response.chart_data[i].loomHumid)
+                            roomHumdVals.push(response.chart_data[i].roomHumid)
                         }
-                    })
+                        {#console.log(paramsVals)#}
+                        var config = {
+                            type: 'line',
+                            data: {
+                                labels: timeVals,
+                                datasets: [
+                                    {
+                                        label: 'Room Temperature',
+                                        backgroundColor: 'rgb(135,149,186)',
+                                        borderColor: 'rgb(4,30,106)',
+                                        data: roomTempVals
+                                    },
+                                    {
+                                        label: 'Loom Temperature',
+                                        backgroundColor: 'rgb(134,56,224)',
+                                        borderColor: 'rgba(134,56,224,0.76)',
+                                        data: loomTempVals
+                                    }
+                                ]
+                            },
+                            options: {
+                                maintainAspectRatio: false,
+                                responsive: false,
+                                plugins: {
+                                    title: {
+                                        display: true,
+                                        text: 'Realtime Graph'
+                                    }
+                                },
+                                interaction: {
+                                    intersect: false,
+                                    mode: 'nearest',
+                                },
+
+                            }
+
+                        };
+
+                        var config2 = {
+                            type: 'line',
+                            data: {
+                                labels: timeVals,
+                                datasets: [
+                                    {
+                                        label: 'Room Humidity',
+                                        backgroundColor: 'rgb(38,55,201)',
+                                        borderColor: 'rgb(103,124,201)',
+                                        data: roomHumdVals
+                                    },
+                                    {
+                                        label: 'Loom Humidity',
+                                        backgroundColor: 'rgb(134,56,224)',
+                                        borderColor: 'rgba(134,56,224,0.76)',
+                                        data: loomHumdVals
+                                    }
+                                ]
+                            },
+                            options: {
+                                maintainAspectRatio: false,
+                                responsive: false,
+                                plugins: {
+                                    title: {
+                                        display: true,
+                                        text: 'Realtime Graph'
+                                    }
+                                },
+                                interaction: {
+                                    intersect: false,
+                                    mode: 'nearest',
+                                },
+
+                            }
+                        };
+                        let $paramsChart = $("#paramsChart");
+                        $("canvas#TempChart").remove()
+                        $("canvas#HumidChart").remove()
+                        var width = (window.innerWidth > 0) ? window.innerWidth : screen.Width;
+                        console.log(typeof width)
+                        console.log($(screen.width))
+                        var screenThresh = 600;
+                        if (width > 600) {
+                            $("div.paramChart").append('<canvas id="TempChart\" style="display: inline; width: 670px; height: 450px;"></canvas>');
+                            $("div.paramChart").append('<canvas id="HumidChart\" style="display: inline; width: 670px; height: 450px;"></canvas>');
+                        } else if (width < screenThresh) {
+                            $("div.paramChart").append('<canvas id="TempChart\" style="display: inline;width: 340px; height: 400px;"></canvas>');
+                            $("div.paramChart").append('<canvas id="HumidChart\" style="display: inline; width: 340px; height: 400px;"></canvas>');
+                        }
+                        var ctx = document.getElementById('TempChart').getContext('2d');
+                        var ctx2 = document.getElementById('HumidChart').getContext('2d');
+
+                        {#ctx.canvas.width = 600;#}
+                        {#ctx.canvas.height = 350;#}
+                        {##}
+                        {##}
+                        {#ctx2.canvas.width = 600;#}
+                        {#ctx2.canvas.height = 350;#}
+                        var LiveChart = new Chart(ctx, config);
+                        var LiveChart2 = new Chart(ctx2, config2);
+
+                    },
+
+                    error: function () {
+                        alert('No Data Found')
+                    }
+                })
 
 
-                }, 10000);
+            }, 10000);
 
 
-            });
-        </script>
+        });
+    </script>
 {% endblock %}
