@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
+import django_heroku
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -25,8 +27,8 @@ SECRET_KEY = 'django-insecure-fsyar@7jvcdo5*l(vfq&zmkc#16uw8ui_=0y@f@5tqgifkr^(q
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.1.6', '127.0.0.1']
-
+# ALLOWED_HOSTS = ['192.168.1.6', '127.0.0.1']
+ALLOWED_HOSTS = ['intellilink.herokuapp.com']
 
 # Application definition
 
@@ -80,10 +82,11 @@ WSGI_APPLICATION = 'IntelliLink.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'IntelliLink',
-        'USER': 'jayateerthd',
-        'PASSWORD': 'jayateerthd@0821',
-        'HOST': 'localhost'
+        'NAME': 'd8fsc18mriitne',
+        'USER': 'ovtyjaabvsbatq',
+        'PASSWORD': '66415463d220553256a0af809cbd0725cec36a3b861dde3eeea341c461c16b57',
+        'HOST': 'ec2-34-230-198-12.compute-1.amazonaws.com',
+        'PORT': '5432'
     }
 }
 
@@ -130,7 +133,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
-
+django_heroku.settings(locals())
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
